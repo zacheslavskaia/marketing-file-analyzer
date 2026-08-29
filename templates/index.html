@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketing File Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="hero__brand">
+        <span class="hero__logo">◎</span>
+        <span>Marketing File Analyzer</span>
+      </div>
+      <h1>Turn raw marketing exports into instant insight.</h1>
+      <p>Upload a CSV, TSV, or Excel report from any ad platform. We auto-detect your
+        columns and surface the KPIs that matter — CTR, CPC, CPA, ROAS and more.</p>
+    </header>
+
+    <section class="uploader" id="dropzone">
+      <input type="file" id="fileInput" accept=".csv,.tsv,.xlsx,.xls" hidden />
+      <div class="uploader__inner">
+        <div class="uploader__icon">⬆</div>
+        <p class="uploader__title">Drop your marketing file here</p>
+        <p class="uploader__hint">or</p>
+        <button class="btn btn--primary" id="browseBtn" type="button">Choose a file</button>
+        <button class="btn btn--ghost" id="sampleBtn" type="button">Try sample data</button>
+        <p class="uploader__meta" id="fileMeta"></p>
+      </div>
+    </section>
+
+    <div class="alert alert--error" id="errorBox" hidden></div>
+    <div class="alert alert--warn" id="warnBox" hidden></div>
+
+    <main class="results" id="results" hidden>
+      <section class="kpis" id="kpiGrid"></section>
+
+      <section class="panel">
+        <h2 class="panel__title">Performance by campaign</h2>
+        <div class="chart-wrap"><canvas id="campaignChart"></canvas></div>
+        <div class="table-wrap"><table id="campaignTable"></table></div>
+      </section>
+
+      <section class="panel" id="channelPanel" hidden>
+        <h2 class="panel__title">Performance by channel</h2>
+        <div class="chart-wrap"><canvas id="channelChart"></canvas></div>
+      </section>
+
+      <section class="panel">
+        <h2 class="panel__title">Detected columns</h2>
+        <div id="detected" class="chips"></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="loading" id="loading" hidden>
+    <div class="spinner"></div>
+    <span>Analyzing…</span>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

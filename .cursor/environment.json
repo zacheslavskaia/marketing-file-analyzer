@@ -1,0 +1,17 @@
+{
+  "name": "marketing-file-analyzer",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "web",
+      "command": ".venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 --timeout 120 --reload app:app",
+      "description": "Marketing File Analyzer web server (http://localhost:5000)"
+    }
+  ],
+  "ports": [
+    {
+      "name": "web",
+      "port": 5000
+    }
+  ]
+}
